@@ -1,8 +1,8 @@
 """This module tests an app with factory boy"""
 
 import pytest
-from .factories import ClientFactory, ParkingFactory
-from ..app.models import Client, Parking
+from tests.factories import ClientFactory, ParkingFactory
+from app.models import Client, Parking
 
 
 @pytest.mark.factory_boy

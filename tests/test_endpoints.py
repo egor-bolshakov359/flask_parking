@@ -1,6 +1,6 @@
 """This module tests an app"""
 import pytest
-from ..app.models import ClientParking, Client, Parking
+from app.models import ClientParking, Client, Parking
 
 urls = ["/clients", "/clients/1", "check"]
 

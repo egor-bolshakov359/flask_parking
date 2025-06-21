@@ -1,3 +1,5 @@
+"""This module defines fixtures for testing"""
+
 from datetime import datetime
 import pytest
 from app.main import create_app

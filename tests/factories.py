@@ -1,3 +1,4 @@
+"""This module defines factories of models"""
 import factory
 from app.models import Client, Parking
 

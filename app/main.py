@@ -3,8 +3,8 @@
 from datetime import datetime
 from flask import Flask, request, jsonify
 from sqlalchemy.exc import NoResultFound
-from module_29_testing.hw.homework1.db import db
-from module_29_testing.hw.homework1.app.models import Client, Parking, ClientParking
+from db import db
+from app.models import Client, Parking, ClientParking
 
 
 def create_app():
