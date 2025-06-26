@@ -3,9 +3,8 @@
 from datetime import datetime
 import pytest
 from app.main import create_app
-from db import db as _db
 from app.models import Parking, Client, ClientParking
-
+from db import db as _db
 
 
 @pytest.fixture

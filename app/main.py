@@ -99,7 +99,8 @@ def create_app():
         parking_id = parking_client_info.get("parking_id")
         parking_info = db.session.get(Parking, ident=parking_id)
         parking_info_json = parking_info.to_json()
-        if parking_info_json["opened"] is True and parking_info_json["count_available_places"] > 0:
+        if (parking_info_json["opened"] is True
+                and parking_info_json["count_available_places"] > 0):
 
             parking_info.count_available_places -= 1
             new_parking_log = ClientParking(
@@ -115,14 +116,18 @@ def create_app():
 
     @app.route("/client_parkings", methods=["DELETE"])
     def client_parkings_delete():
-        """Post a parking exit information into existing parking entrance log"""
+        """
+        Post a parking exit information into existing parking entrance log
+        """
         parking_client_info: dict = request.get_json().get("data")
         client_id = parking_client_info.get("client_id")
         parking_id = parking_client_info.get("parking_id")
         parking_info = db.session.get(Parking, ident=parking_id)
         try:
-            parking_log_info = (db.session.query(ClientParking).filter_by(client=client_id)
-                                .filter_by(parking_id=parking_id).filter_by(time_out=None).one())
+            parking_log_info = (db.session.query(ClientParking)
+                                .filter_by(client=client_id)
+                                .filter_by(parking_id=parking_id)
+                                .filter_by(time_out=None).one())
 
             parking_log_info.time_out = datetime.now()
             parking_info.count_available_places += 1
