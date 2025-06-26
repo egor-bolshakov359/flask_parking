@@ -1,4 +1,4 @@
-name: Pylint
+name: Pylint + flake8
 
 on: [push]
 
@@ -19,6 +19,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pylint
-    - name: Analysing the code with pylint
+        pip install flake8
+    # - name: Analysing the code with pylint
+    #   run: |
+    #     pylint $(git ls-files '*.py')
+    - name: Analysing the code with flake8
       run: |
-        pylint $(git ls-files '*.py')
+        flake8 --extend-ignore E501
+    - name: Run unittests
+      run: |
+        pytest tests
