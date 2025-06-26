@@ -21,6 +21,7 @@ jobs:
         pip install pylint
         pip install flake8
     - name: Analysing the code with pylint
+      if: always()
       run: |
         pylint $(git ls-files '*.py') --disable=all
     - name: Analysing the code with flake8
