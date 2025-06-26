@@ -26,6 +26,7 @@ jobs:
     - name: Analysing the code with flake8
       run: |
         flake8 $(git ls-files '*.py')
+        flake8 --extend-ignore E203,W234 path/to/code/
     - name: Run unittests
       run: |
         pytest tests
