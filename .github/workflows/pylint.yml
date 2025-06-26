@@ -22,7 +22,7 @@ jobs:
         pip install flake8
     - name: Analysing the code with pylint
       run: |
-        pylint $(git ls-files '*.py') --disable=W06,C01,R0903
+        pylint $(git ls-files '*.py') --disable
     - name: Analysing the code with flake8
       run: |
         flake8 --extend-ignore E501
