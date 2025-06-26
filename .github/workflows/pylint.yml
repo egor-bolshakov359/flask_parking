@@ -23,7 +23,7 @@ jobs:
     - name: Analysing the code with pylint
       if: always()
       run: |
-        pylint $(git ls-files '*.py') --disable=W, C, R
+        pylint $(git ls-files '*.py') --disable=C --disable=R --disable=W
     - name: Analysing the code with flake8
       if: always()
       run: |
