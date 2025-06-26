@@ -20,9 +20,9 @@ jobs:
         pip install -r requirements.txt
         pip install pylint
         pip install flake8
-    # - name: Analysing the code with pylint
-    #   run: |
-    #     pylint $(git ls-files '*.py') --disable=W0613,C0116,R0903
+    - name: Analysing the code with pylint
+      run: |
+        pylint $(git ls-files '*.py') --disable=W06,C01,R0903
     - name: Analysing the code with flake8
       run: |
         flake8 --extend-ignore E501
