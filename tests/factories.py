@@ -1,10 +1,12 @@
 """This module defines factories of models"""
+
 import factory
 from app.models import Client, Parking
 
 
 class ClientFactory(factory.Factory):
     """This class defines a factory of a Client model"""
+
     class Meta:
         model = Client
 
@@ -16,6 +18,7 @@ class ClientFactory(factory.Factory):
 
 class ParkingFactory(factory.Factory):
     """This class defines a factory of a Parking model"""
+
     class Meta:
         model = Parking
 

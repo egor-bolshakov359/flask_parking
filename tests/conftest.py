@@ -12,7 +12,7 @@ def app():
     """This function creates a fixture of an app"""
     _app = create_app()
     _app.config["TESTING"] = True
-    _app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///test.db'
+    _app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 
     with _app.app_context():
         _db.drop_all()
@@ -22,14 +22,14 @@ def app():
             name="newname",
             surname="newsurname",
             credit_card="999",
-            car_number="0aaa000"
+            car_number="0aaa000",
         )
 
         _parking = Parking(
             address="11 Main st",
             opened=True,
             count_places=10,
-            count_available_places=10
+            count_available_places=10,
         )
         _clientparking = ClientParking(
             client=1,

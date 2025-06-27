@@ -8,13 +8,12 @@ from app.models import Client, Parking, ClientParking
 
 
 def create_app():
-
     """
     Create an app and configure it
     """
 
     app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///database.db'
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
     db.init_app(app)
 
     with app.app_context():
@@ -26,7 +25,6 @@ def create_app():
 
     @app.route("/check")
     def hello():
-
         """Create first test client profile"""
 
         db.session.add(Client(name="a", surname="b"))
@@ -35,7 +33,6 @@ def create_app():
 
     @app.route("/clients")
     def clients():
-
         """Get all client profiles"""
 
         all_clients = db.session.query(Client).all()
@@ -44,7 +41,6 @@ def create_app():
 
     @app.route("/clients/<int:client_id>")
     def client(client_id: int):
-
         """Get a specific client profile"""
 
         client_info = db.session.query(Client).filter_by(id=client_id).one()
@@ -53,7 +49,6 @@ def create_app():
 
     @app.route("/clients", methods=["POST"])
     def post_client():
-
         """Post a new client profile"""
 
         client_data: dict = request.get_json().get("data")
@@ -65,7 +60,7 @@ def create_app():
             name=client_name,
             surname=client_surname,
             credit_card=client_card,
-            car_number=client_car
+            car_number=client_car,
         )
         db.session.add(client_info)
         db.session.commit()
@@ -73,7 +68,6 @@ def create_app():
 
     @app.route("/parkings", methods=["POST"])
     def post_parking():
-
         """Post a new parking lot profile"""
 
         parking_data: dict = request.get_json().get("data")
@@ -83,7 +77,7 @@ def create_app():
             address=parking_address,
             opened=True,
             count_places=parking_spaces,
-            count_available_places=parking_spaces
+            count_available_places=parking_spaces,
         )
         db.session.add(parking_data)
         db.session.commit()
@@ -99,14 +93,14 @@ def create_app():
         parking_id = parking_client_info.get("parking_id")
         parking_info = db.session.get(Parking, ident=parking_id)
         parking_info_json = parking_info.to_json()
-        if (parking_info_json["opened"] is True
-                and parking_info_json["count_available_places"] > 0):
+        if (
+            parking_info_json["opened"] is True
+            and parking_info_json["count_available_places"] > 0
+        ):
 
             parking_info.count_available_places -= 1
             new_parking_log = ClientParking(
-                client=client_id,
-                parking_id=parking_id,
-                time_in=datetime.now()
+                client=client_id, parking_id=parking_id, time_in=datetime.now()
             )
             db.session.add(new_parking_log)
             db.session.commit()
@@ -124,10 +118,13 @@ def create_app():
         parking_id = parking_client_info.get("parking_id")
         parking_info = db.session.get(Parking, ident=parking_id)
         try:
-            parking_log_info = (db.session.query(ClientParking)
-                                .filter_by(client=client_id)
-                                .filter_by(parking_id=parking_id)
-                                .filter_by(time_out=None).one())
+            parking_log_info = (
+                db.session.query(ClientParking)
+                .filter_by(client=client_id)
+                .filter_by(parking_id=parking_id)
+                .filter_by(time_out=None)
+                .one()
+            )
 
             parking_log_info.time_out = datetime.now()
             parking_info.count_available_places += 1

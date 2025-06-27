@@ -6,6 +6,7 @@ from db import db
 
 class Client(db.Model):
     """A class used to represent a client"""
+
     __tablename__ = "clients"
 
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -20,6 +21,7 @@ class Client(db.Model):
 
 class Parking(db.Model):
     """A class used to represent a parking lot"""
+
     __tablename__ = "parking"
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     address = db.Column(db.String(100), nullable=False)
@@ -33,9 +35,12 @@ class Parking(db.Model):
 
 class ClientParking(db.Model):
     """A class used to represent a parking log"""
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     client = db.Column(db.Integer, db.ForeignKey("clients.id"))
     parking_id = db.Column(db.Integer, db.ForeignKey("parking.id"))
     time_in = db.Column(db.DateTime)
     time_out = db.Column(db.DateTime)
-    __table_args__ = (db.UniqueConstraint("client", "parking_id", name="unique_client_parking"),)
+    __table_args__ = (
+        db.UniqueConstraint("client", "parking_id", name="unique_client_parking"),
+    )
