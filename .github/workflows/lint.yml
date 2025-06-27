@@ -1,4 +1,4 @@
-name: Pylint + flake8
+name: Lint
 
 on: [push]
 
@@ -28,6 +28,10 @@ jobs:
       if: always()
       run: |
         flake8 --extend-ignore E501
+    - name: Analysing the code with black
+      if: always()
+      run: |
+        black --diff $(git ls-files '*.py')
     - name: Run unittests
       if: always()
       run: |
