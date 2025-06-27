@@ -31,11 +31,7 @@ def app():
             count_places=10,
             count_available_places=10,
         )
-        _clientparking = ClientParking(
-            client=1,
-            parking_id=1,
-            time_in=datetime.now()
-        )
+        _clientparking = ClientParking(client=1, parking_id=1, time_in=datetime.now())
         _db.session.add(_client)
         _db.session.add(_parking)
         _db.session.add(_clientparking)
